@@ -16,10 +16,10 @@ Function.prototype.myCall = function(context, ...args) {
 
 ## 2.apply 所有参数为一个数组
 ```javascript
-Function.prototype.myApply = function(context, argArr) {
+Function.prototype.myApply = function(context, args) {
 	context = context || window
 	context.fn = this
-	const result = context.fn(...argArr)
+	const result = context.fn(...args)
 	delete context.fn
 	return result
 }
@@ -29,13 +29,13 @@ Function.prototype.myApply = function(context, argArr) {
 
 ## 3.call返回一个指定this指向的函数
 ```javascript
-Function.prototype.myBind = function(context, ...argArr) {
+Function.prototype.myBind = function(context, ...args) {
 	context = context || window
 	context.fn = this
 	const fn = context.fn
 	delete context.fn
 	return function() {
-		fn.apply(context, ...argArr)
+		fn.apply(context, ...args)
 	}
 }
 ```

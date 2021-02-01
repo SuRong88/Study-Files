@@ -12,9 +12,9 @@ function getImgBase64(url) {
 		let dataURL = '';
 		Img.src = url;
 		Img.onload = function() { //确保图片完整获取
-			const canvas = document.createElement("canvas"), //创建canvas元素
-			const	width = Img.width, //canvas的尺寸和图片一样
-			const	height = Img.height;
+			const canvas = document.createElement("canvas"); //创建canvas元素
+			const width = Img.width; //canvas的尺寸和图片一样
+			const height = Img.height;
 			canvas.width = width;
 			canvas.height = height;
 			canvas.getContext("2d").drawImage(Img, 0, 0, width, height); //绘制canvas
