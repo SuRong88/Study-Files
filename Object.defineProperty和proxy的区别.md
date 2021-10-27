@@ -59,3 +59,16 @@ proxy.value = 1 // 调用相应函数
 1. 可以劫持数组的改变;
 2. `defineProperty` 是对属性的劫持, `Proxy` 是对对象的劫持;
 3. `Proxy`有多达13种拦截方法,不限于`apply`、`ownKeys`、`deleteProperty`、`has`等等是`Object.defineProperty`不具备的。
+
+
+
+### 缺点： 内置对象：内部插槽（Internal slots）
+
+许多内置对象，例如 `Map`, `Set`, `Date`, `Promise` 等等都使用了所谓的 “内部插槽”。
+
+它们类似于属性，但仅限于内部使用，仅用于规范目的。例如， `Map` 将项目存储在 `[[MapData]]`中。内置方法直接访问它们，而不通过 `[[Get]]/[[Set]]` 内部方法。所以 `Proxy` 不能拦截。
+
+为什么要在意呢？他们是内部的！
+
+好吧，这就是问题。在像这样的内置对象被代理后，代理对象没有这些内部插槽，因此内置方法将失败。
+
